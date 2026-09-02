@@ -44,6 +44,12 @@
 
 *,*::before,*::after{box-sizing:border-box;}
 html,body{height:100%;}
+
+/* Cualquier elemento con el atributo HTML "hidden" debe ocultarse siempre,
+   incluso si una clase (.app, .sheet-overlay, .toast, etc.) le pone su propio
+   "display". Sin esta regla, el navegador puede mostrarlo igual y varias
+   pantallas quedan superpuestas (login + app + overlays a la vez). */
+[hidden]{ display:none !important; }
 body{
   margin:0;
   background:var(--cream);
