@@ -36,7 +36,12 @@ const ICONS = {
   credit: `<svg viewBox="0 0 24 24" fill="none"><rect x="2.5" y="5.5" width="19" height="13" rx="2.3" stroke="currentColor" stroke-width="1.8"/><path d="M2.5 10h19" stroke="currentColor" stroke-width="1.8"/></svg>`,
   cookie: `<svg viewBox="0 0 24 24" fill="none"><path d="M12 2c-1.5 2.5-4.5 3-4.5 6 0 1.5 1 2.5 1 2.5s-3 .5-3 4c0 2.75 2.25 4.5 4.5 4.5 1 0 1.75-.35 2-.5.25.15 1 .5 2 .5 2.25 0 4.5-1.75 4.5-4.5 0-3.5-3-4-3-4s1-1 1-2.5c0-3-3-3.5-4.5-6z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg>`,
   gift: `<svg viewBox="0 0 24 24" fill="none"><rect x="3.5" y="9" width="17" height="12" rx="1.5" stroke="currentColor" stroke-width="1.8"/><path d="M2.5 6h19v3h-19zM12 9v12M12 6c-1-2.5-3-3.5-4.5-2.5S6 6.5 8 6.5H12ZM12 6c1-2.5 3-3.5 4.5-2.5S18 6.5 16 6.5H12Z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg>`,
-  info: `<svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.8"/><path d="M12 11v5.5M12 8v.01" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>`
+  info: `<svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.8"/><path d="M12 11v5.5M12 8v.01" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>`,
+  whatsapp: `<svg viewBox="0 0 24 24" fill="none"><path d="M3.5 20.5 4.8 16A8.4 8.4 0 1 1 8 19.2l-4.5 1.3Z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><path d="M8.7 8.6c.2-.5.5-.5.8-.5h.5c.2 0 .4 0 .6.5s.7 1.6.7 1.7.1.2 0 .4c-.1.2-.2.3-.3.4l-.5.5c-.2.2-.3.4-.1.7.2.3.8 1.2 1.7 1.9 1.1.9 2 1.2 2.3 1.3.3.1.4.1.6-.1l.7-.8c.2-.3.4-.2.7-.1l1.5.7c.2.1.4.2.5.3.1.2.1.9-.2 1.4s-1.4 1-2 1c-.5 0-1.1 0-3.5-1.4-3-1.7-4.2-4.3-4.3-4.5-.1-.2-.9-1.2-.9-2.3s.6-1.6.8-1.9Z" fill="currentColor"/></svg>`,
+  printer: `<svg viewBox="0 0 24 24" fill="none"><path d="M7 8V3.5h10V8" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><rect x="4" y="8" width="16" height="8" rx="1.8" stroke="currentColor" stroke-width="1.8"/><path d="M7 14h10v6.5H7z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg>`,
+  layers: `<svg viewBox="0 0 24 24" fill="none"><path d="m12 3 9 5-9 5-9-5 9-5Z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><path d="m3 13 9 5 9-5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>`,
+  lock: `<svg viewBox="0 0 24 24" fill="none"><rect x="5" y="11" width="14" height="9" rx="2" stroke="currentColor" stroke-width="1.8"/><path d="M8 11V7.5a4 4 0 0 1 8 0V11" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>`,
+  tag: `<svg viewBox="0 0 24 24" fill="none"><path d="m11 3 8 8-8 8-8-8V3h8Z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><circle cx="8" cy="8" r="1.3" fill="currentColor"/></svg>`
 };
 
 /* ---------------------- UTILIDADES ---------------------- */
@@ -119,17 +124,24 @@ const NOMBRES_CLIENTES = [
   ['Andrés Castillo', '309 901 2345', 'Cra 3 #7-40, Barrio Las Flores'],
   ['Patricia Nieto', '310 012 3456', 'Cll 18 #2-09, Barrio Bella Vista']
 ];
+const DEPARTAMENTOS = ['Cortadores', 'Sets', 'Conos', 'Accesorios'];
+const FORMAS_VENTA = ['Unidad', 'Docena', 'Set', 'Caja x12', 'Mayoreo'];
+
+/* [nombre, precioNormal, precioEspecial, costo, stock, presentacion, departamento, formaVenta] */
 const PRODUCTOS_SEED = [
-  ['Cortador Estrella', 3500, 120, 'Individual · metal'],
-  ['Cortador Corazón', 3500, 95, 'Individual · metal'],
-  ['Cortador Círculo', 2800, 150, 'Individual · metal'],
-  ['Cortador Luna', 4200, 60, 'Individual · metal'],
-  ['Cortador Flor', 3900, 80, 'Individual · metal'],
-  ['Cortador Oso', 5200, 14, 'Individual · plástico'],
-  ['Cortador Casita', 4800, 55, 'Individual · metal'],
-  ['Set Navideño x6', 22000, 30, 'Set · 6 piezas'],
-  ['Cortador Mariposa', 3700, 70, 'Individual · metal'],
-  ['Set Números 0-9', 35000, 8, 'Set · 10 piezas']
+  ['Cortador Estrella', 3500, 3100, 1800, 120, 'Individual · metal', 'Cortadores', 'Unidad'],
+  ['Cortador Corazón', 3500, 3100, 1800, 95, 'Individual · metal', 'Cortadores', 'Unidad'],
+  ['Cortador Círculo', 2800, 2500, 1400, 150, 'Individual · metal', 'Cortadores', 'Unidad'],
+  ['Cortador Luna', 4200, 3700, 2100, 60, 'Individual · metal', 'Cortadores', 'Unidad'],
+  ['Cortador Flor', 3900, 3450, 2000, 80, 'Individual · metal', 'Cortadores', 'Unidad'],
+  ['Cortador Oso', 5200, 4600, 2600, 14, 'Individual · plástico', 'Cortadores', 'Unidad'],
+  ['Cortador Casita', 4800, 4250, 2400, 55, 'Individual · metal', 'Cortadores', 'Unidad'],
+  ['Set Navideño x6', 22000, 19500, 11500, 30, 'Set · 6 piezas', 'Sets', 'Set'],
+  ['Cortador Mariposa', 3700, 3250, 1900, 70, 'Individual · metal', 'Cortadores', 'Unidad'],
+  ['Set Números 0-9', 35000, 31000, 18000, 8, 'Set · 10 piezas', 'Sets', 'Set'],
+  ['Cono para waffle', 6800, 6000, 3400, 40, 'Individual · metal', 'Conos', 'Unidad'],
+  ['Set de espátulas x3', 15000, 13200, 7800, 25, 'Set · 3 piezas', 'Accesorios', 'Set'],
+  ['Rodillo antiadherente', 9800, 8700, 5200, 20, 'Individual', 'Accesorios', 'Unidad']
 ];
 
 function buildSeed() {
@@ -142,13 +154,16 @@ function buildSeed() {
     { id: 3, nombre: 'Carro 3', conductor: 'Édgar Salazar' }
   ];
 
+  const CLIENTES_ESPECIALES = [3, 4, 9]; // ids con lista de precios "especial"
   const clientes = NOMBRES_CLIENTES.map((c, i) => ({
     id: i + 1, nombre: c[0], telefono: c[1], direccion: c[2],
-    carroDefault: (i % 3) + 1
+    carroDefault: (i % 3) + 1,
+    listaPrecio: CLIENTES_ESPECIALES.includes(i + 1) ? 'especial' : 'normal'
   }));
 
   const productos = PRODUCTOS_SEED.map((p, i) => ({
-    id: i + 1, nombre: p[0], precio: p[1], stock: p[2], presentacion: p[3]
+    id: i + 1, nombre: p[0], precioNormal: p[1], precioEspecial: p[2], costo: p[3],
+    stock: p[4], presentacion: p[5], departamento: p[6], formaVenta: p[7]
   }));
 
   const usuarios = [
@@ -179,10 +194,12 @@ function buildSeed() {
       const asignados = asignaciones[`${carro.id}_${fecha}`] || [];
       asignados.forEach(clienteId => {
         if (rng() < 0.14) return; // ese día no compró
+        const clienteRef = clientes.find(c => c.id === clienteId);
         const nItems = randInt(rng, 1, 3);
         const prodsElegidos = pickN(rng, productos, nItems);
         const items = prodsElegidos.map(p => ({
-          productoId: p.id, cantidad: randInt(rng, 1, 3), precioUnit: p.precio
+          productoId: p.id, cantidad: randInt(rng, 1, 3),
+          precioUnit: clienteRef.listaPrecio === 'especial' ? p.precioEspecial : p.precioNormal
         }));
         const subtotal = items.reduce((s, it) => s + it.cantidad * it.precioUnit, 0);
         const aplicaDescuento = rng() < 0.12;
@@ -214,7 +231,17 @@ function buildSeed() {
     });
   });
 
-  return { carros, clientes, productos, usuarios, asignaciones, ventas, meta: { seedDate: today, nextVentaId: ventaId, notifDismissed: [] } };
+  // Cierres: los días anteriores a hoy quedan como "carro confirmado";
+  // el día de hoy se deja abierto para poder probar el flujo de confirmación.
+  const cierres = {};
+  dias.forEach(fecha => {
+    if (fecha === today) return;
+    carros.forEach(carro => {
+      cierres[`${carro.id}_${fecha}`] = { confirmadoEn: fecha + 'T18:45:00' };
+    });
+  });
+
+  return { carros, clientes, productos, usuarios, asignaciones, ventas, cierres, meta: { seedDate: today, nextVentaId: ventaId, notifDismissed: [] } };
 }
 
 /* ---------------------- CAPA DE "API" (localStorage) ----------------------
@@ -223,13 +250,35 @@ function buildSeed() {
 const STORAGE_KEY = 'corta_db_v1';
 let DB = null;
 
+/* Ajusta datos guardados de una versión anterior del prototipo al modelo actual
+   (doble lista de precios, departamentos, costo, cierres de carro, etc.) */
+function migrateDB(db) {
+  db.cierres = db.cierres || {};
+  db.productos = (db.productos || []).map(p => {
+    const base = p.precioNormal != null ? p.precioNormal : (p.precio != null ? p.precio : 0);
+    return {
+      id: p.id, nombre: p.nombre,
+      precioNormal: p.precioNormal != null ? p.precioNormal : base,
+      precioEspecial: p.precioEspecial != null ? p.precioEspecial : Math.round(base * 0.9 / 100) * 100,
+      costo: p.costo != null ? p.costo : Math.round(base * 0.55 / 100) * 100,
+      stock: p.stock || 0,
+      presentacion: p.presentacion || 'Individual',
+      departamento: p.departamento || 'Cortadores',
+      formaVenta: p.formaVenta || 'Unidad'
+    };
+  });
+  db.clientes = (db.clientes || []).map(c => ({ listaPrecio: 'normal', ...c }));
+  return db;
+}
 function loadDB() {
   let raw = null;
   try { raw = JSON.parse(localStorage.getItem(STORAGE_KEY)); } catch (e) { raw = null; }
   if (!raw || !raw.meta || raw.meta.seedDate !== todayStr()) {
     raw = buildSeed();
-    saveDB(raw);
+  } else {
+    raw = migrateDB(raw);
   }
+  saveDB(raw);
   DB = raw;
   return DB;
 }
@@ -250,7 +299,10 @@ const State = {
   repRange: { start: addDays(todayStr(), -6), end: todayStr() },
   clientesSearch: '',
   ventaForm: null,
-  session: null
+  session: null,
+  productosDept: 'todos',
+  repCarro: 'todos',
+  listaPreciosTab: 'normal'
 };
 
 const TOP_TABS = ['dashboard', 'carros', 'clientes', 'reportes', 'mas'];
@@ -259,7 +311,7 @@ const VIEW_TAB = {
   clientes: 'clientes', clienteDetail: 'clientes',
   reportes: 'reportes',
   mas: 'mas', productos: 'mas', pagos: 'mas', historial: 'mas',
-  perfil: 'mas', usuarios: 'mas', config: 'mas', notificaciones: 'mas',
+  perfil: 'mas', usuarios: 'mas', config: 'mas', notificaciones: 'mas', listasPrecios: 'mas',
   ventaNueva: null
 };
 const VIEW_TITLE = {
@@ -267,7 +319,7 @@ const VIEW_TITLE = {
   clienteDetail: 'Cliente', reportes: 'Reportes', mas: 'Más', productos: 'Productos',
   pagos: 'Pagos y deudas', historial: 'Historial de ventas', perfil: 'Perfil del jefe',
   usuarios: 'Usuarios', config: 'Configuración', notificaciones: 'Notificaciones',
-  ventaNueva: 'Registrar venta'
+  listasPrecios: 'Listas de precios', ventaNueva: 'Registrar venta'
 };
 
 function navigate(view, params = {}, opts = {}) {
@@ -313,6 +365,84 @@ function closeSheet() {
 }
 $('#sheet-overlay').addEventListener('click', (e) => { if (e.target.id === 'sheet-overlay') closeSheet(); });
 
+/* ---------------------- IMPRESIÓN (ticket térmico 80mm) ---------------------- */
+function imprimirTickets(htmlCopias) {
+  $('#print-area').innerHTML = htmlCopias;
+  setTimeout(() => window.print(), 80);
+}
+function ticketHeader(subtitulo) {
+  return `
+    <div class="t-center"><h4>CORTA</h4></div>
+    <div class="t-center t-small">Ventas de ruta · Cortadores de galletas</div>
+    <div class="t-center t-small">NIT 900.123.456-7</div>
+    <div class="t-line"></div>
+    <div class="t-small">${esc(subtitulo)}</div>
+    <div class="t-line"></div>`;
+}
+function ticketFactura(v) {
+  const cliente = DB.clientes.find(c => c.id === v.clienteId);
+  const itemsOrdenados = v.items.slice().sort((a, b) => (b.cantidad * b.precioUnit) - (a.cantidad * a.precioUnit));
+  const subtotal = itemsOrdenados.reduce((s, it) => s + it.cantidad * it.precioUnit, 0);
+  return `
+    <div class="ticket">
+      ${ticketHeader(`Factura #${v.id} · ${fmtDateShort(v.fecha)}`)}
+      <div class="t-small">Cliente: ${esc(cliente.nombre)}</div>
+      <div class="t-small">Carro: ${esc(nombreCarro(v.carroId))}</div>
+      <div class="t-small">Lista: ${listaLabel(cliente.listaPrecio)}</div>
+      <div class="t-line"></div>
+      ${itemsOrdenados.map(it => `
+        <div class="t-item">
+          <div class="t-row"><span>${esc(nombreProducto(it.productoId))}</span></div>
+          <div class="t-row t-small"><span>${it.cantidad} × ${fmtMoney(it.precioUnit)}</span><span>${fmtMoney(it.cantidad * it.precioUnit)}</span></div>
+        </div>`).join('')}
+      <div class="t-line"></div>
+      <div class="t-row t-small"><span>Subtotal</span><span>${fmtMoney(subtotal)}</span></div>
+      ${v.descuento ? `<div class="t-row t-small"><span>Descuento</span><span>-${fmtMoney(v.descuento)}</span></div>` : ''}
+      <div class="t-row t-total"><span>TOTAL</span><span>${fmtMoney(v.total)}</span></div>
+      <div class="t-small" style="margin-top:4px;">Pago: ${payLabel(v.formaPago)} · Estado: ${v.estado === 'pagado' ? 'Pagado' : v.estado === 'abono' ? 'Abono' : 'Pendiente'}</div>
+      ${ventaSaldo(v) > 0 ? `<div class="t-small">Saldo pendiente: ${fmtMoney(ventaSaldo(v))}</div>` : ''}
+      <div class="t-line"></div>
+      <div class="t-small"><strong>Uso interno (no mostrar al cliente)</strong></div>
+      <div class="t-row t-small"><span>Costo</span><span>${fmtMoney(costoVenta(v))}</span></div>
+      <div class="t-row t-small"><span>Ganancia est.</span><span>${fmtMoney(gananciaVenta(v))}</span></div>
+      <div class="t-center t-small" style="margin-top:8px;">¡Gracias por su compra!</div>
+    </div>`;
+}
+function imprimirFactura(ventaId) {
+  const v = DB.ventas.find(v => v.id === ventaId);
+  const copias = [ticketFactura(v), ticketFactura(v), ticketFactura(v)].join('');
+  imprimirTickets(copias);
+}
+function imprimirListaPrecios(lista) {
+  const key = lista === 'especial' ? 'precioEspecial' : 'precioNormal';
+  const html = `
+    <div class="ticket">
+      ${ticketHeader(`Lista de precios · ${listaLabel(lista)}`)}
+      ${DB.productos.map(p => `
+        <div class="t-row t-small" style="margin-bottom:3px;"><span>${esc(p.nombre)}</span><span>${fmtMoney(p[key])}</span></div>`).join('')}
+      <div class="t-line"></div>
+      <div class="t-center t-small">${fmtDateLong(todayStr())}</div>
+    </div>`;
+  imprimirTickets(html);
+}
+function imprimirCierre(carroId, fecha) {
+  const ventasDia = DB.ventas.filter(v => v.carroId === carroId && v.fecha === fecha);
+  const s = statsFor(ventasDia);
+  const html = `
+    <div class="ticket">
+      ${ticketHeader(`Cierre de carro · ${esc(nombreCarro(carroId))}`)}
+      <div class="t-small">Fecha: ${fmtDateLong(fecha)}</div>
+      <div class="t-line"></div>
+      ${ventasDia.map(v => `<div class="t-row t-small"><span>${esc(nombreCliente(v.clienteId))}</span><span>${fmtMoney(v.total)}</span></div>`).join('')}
+      <div class="t-line"></div>
+      <div class="t-row t-small"><span>Clientes atendidos</span><span>${s.clientes}</span></div>
+      <div class="t-row t-small"><span>Productos vendidos</span><span>${s.productosVendidos}</span></div>
+      <div class="t-row t-total"><span>Total vendido</span><span>${fmtMoney(s.totalVendido)}</span></div>
+      <div class="t-row t-small"><span>Pendiente</span><span>${fmtMoney(s.totalPendiente)}</span></div>
+    </div>`;
+  imprimirTickets(html);
+}
+
 /* ============================================================
    LOGIN
    ============================================================ */
@@ -350,6 +480,7 @@ const NAV_ITEMS = [
 ];
 const SIDE_EXTRA = [
   { id: 'productos', label: 'Productos', icon: 'box' },
+  { id: 'listasPrecios', label: 'Listas de precios', icon: 'tag' },
   { id: 'historial', label: 'Historial de ventas', icon: 'history' },
   { id: 'pagos', label: 'Pagos y deudas', icon: 'wallet' },
   { id: 'config', label: 'Configuración', icon: 'gear' }
@@ -437,6 +568,34 @@ function badgeEstado(estado) {
 }
 function payIcon(fp) { return fp === 'efectivo' ? ICONS.cash : fp === 'transferencia' ? ICONS.transfer : ICONS.credit; }
 function payLabel(fp) { return fp === 'efectivo' ? 'Efectivo' : fp === 'transferencia' ? 'Transferencia' : 'Crédito'; }
+
+/* Precio de un producto según la lista asignada al cliente (normal o especial) */
+function precioParaCliente(producto, cliente) {
+  if (cliente && cliente.listaPrecio === 'especial') return producto.precioEspecial;
+  return producto.precioNormal;
+}
+function listaLabel(lista) { return lista === 'especial' ? 'Especial' : 'Normal'; }
+
+/* Confirmación / cierre de carro por fecha */
+function claveCierre(carroId, fecha) { return `${carroId}_${fecha}`; }
+function estaConfirmado(carroId, fecha) { return !!(DB.cierres || {})[claveCierre(carroId, fecha)]; }
+function infoCierre(carroId, fecha) { return (DB.cierres || {})[claveCierre(carroId, fecha)] || null; }
+
+/* Ganancia estimada de una venta: (precio - costo) x cantidad, menos el descuento aplicado */
+function gananciaVenta(v) {
+  const gananciaBruta = v.items.reduce((s, it) => {
+    const p = DB.productos.find(p => p.id === it.productoId);
+    const costo = p ? p.costo : 0;
+    return s + (it.precioUnit - costo) * it.cantidad;
+  }, 0);
+  return Math.max(0, gananciaBruta - (v.descuento || 0));
+}
+function costoVenta(v) {
+  return v.items.reduce((s, it) => {
+    const p = DB.productos.find(p => p.id === it.productoId);
+    return s + (p ? p.costo : 0) * it.cantidad;
+  }, 0);
+}
 
 /* ============================================================
    VISTA: DASHBOARD
@@ -578,6 +737,8 @@ function viewCarroDetail(params) {
   const totalVendido = ventasDia.reduce((s, v) => s + v.total, 0);
   const totalCobrado = ventasDia.reduce((s, v) => s + ventaCobrado(v), 0);
   const totalPendiente = ventasDia.reduce((s, v) => s + ventaSaldo(v), 0);
+  const confirmado = estaConfirmado(carro.id, fecha);
+  const cierre = infoCierre(carro.id, fecha);
 
   return `
     <div class="detail-hero">
@@ -601,9 +762,21 @@ function viewCarroDetail(params) {
       <div class="icon-square" data-action="carro-day" data-dir="1">${ICONS.chevronRight}</div>
     </div>
 
+    ${confirmado ? `
+      <div class="lock-banner confirmed">
+        ${ICONS.lock}
+        <div class="lb-text"><strong>Carro confirmado</strong>Cerrado el ${fmtDateShort(cierre.confirmadoEn.slice(0, 10))}. No se pueden agregar más pedidos para esta fecha.</div>
+        <button class="btn btn-secondary btn-sm" data-action="ver-reporte-cierre" data-carro="${carro.id}" data-fecha="${fecha}">Ver reporte</button>
+      </div>` : `
+      <div class="lock-banner">
+        ${ICONS.clock}
+        <div class="lb-text"><strong>Pedidos pendientes de confirmar</strong>Estos pedidos son provisionales hasta que confirmes el carro.</div>
+        <button class="btn btn-primary btn-sm" data-action="confirmar-carro" data-carro="${carro.id}" data-fecha="${fecha}">Confirmar carro</button>
+      </div>`}
+
     <div class="page-header" style="margin-bottom:10px;">
-      <h2 style="font-size:16px;">Clientes atendidos · ${fmtDateShort(fecha)}</h2>
-      <button class="btn btn-secondary btn-sm" data-action="asignar-clientes" data-carro="${carro.id}" data-fecha="${fecha}">${ICONS.plus} Asignar</button>
+      <h2 style="font-size:16px;">${confirmado ? 'Pedidos confirmados' : 'Clientes atendidos'} · ${fmtDateShort(fecha)}</h2>
+      ${confirmado ? '' : `<button class="btn btn-secondary btn-sm" data-action="asignar-clientes" data-carro="${carro.id}" data-fecha="${fecha}">${ICONS.plus} Asignar</button>`}
     </div>
 
     <div class="list">
@@ -644,6 +817,72 @@ function mountCarroDetail(params) {
   $all('[data-action="cliente-dia"]').forEach(row => row.addEventListener('click', () => {
     sheetClienteDia(parseInt(row.dataset.cliente), parseInt(row.dataset.carro), row.dataset.fecha);
   }));
+  const confirmarBtn = $('[data-action="confirmar-carro"]');
+  if (confirmarBtn) confirmarBtn.addEventListener('click', () => sheetConfirmarCarro(carro.id, fecha));
+  const verReporteBtn = $('[data-action="ver-reporte-cierre"]');
+  if (verReporteBtn) verReporteBtn.addEventListener('click', () => sheetReporteCierre(carro.id, fecha));
+}
+
+/* ---------------------- Confirmar carro + reporte de cierre ---------------------- */
+function sheetConfirmarCarro(carroId, fecha) {
+  const ventasDia = DB.ventas.filter(v => v.carroId === carroId && v.fecha === fecha);
+  const s = statsFor(ventasDia);
+  openSheet(`
+    <div class="sheet-head"><h3>Confirmar carro</h3><button class="icon-btn" data-action="close-sheet">✕</button></div>
+    <p class="field-note" style="margin-bottom:6px;">${esc(nombreCarro(carroId))} · ${fmtDateLong(fecha)}</p>
+    <p class="row-sub" style="margin-bottom:4px;">Al confirmar, este carro queda cerrado para esta fecha y no se podrán registrar más pedidos. Los pagos pendientes se pueden seguir cobrando después.</p>
+    <div class="confirm-summary">
+      <div class="stat-card"><div class="stat-label">${ICONS.doc} Pedidos</div><div class="stat-value">${s.nVentas}</div></div>
+      <div class="stat-card"><div class="stat-label">${ICONS.users} Clientes</div><div class="stat-value">${s.clientes}</div></div>
+      <div class="stat-card"><div class="stat-label">${ICONS.cash} Vendido</div><div class="stat-value">${fmtMoney(s.totalVendido)}</div></div>
+      <div class="stat-card"><div class="stat-label">${ICONS.wallet} Pendiente</div><div class="stat-value">${fmtMoney(s.totalPendiente)}</div></div>
+    </div>
+    <button class="whatsapp-btn" id="wa-aviso" type="button">${ICONS.whatsapp} Enviar aviso por WhatsApp <span class="wa-tag">Próximamente</span></button>
+    <button class="btn btn-primary btn-block" id="confirmar-carro-btn" style="margin-top:14px;">${ICONS.lock} Confirmar carro</button>
+  `, (sheet) => {
+    $('#wa-aviso', sheet).addEventListener('click', () => toast('La integración con WhatsApp estará disponible próximamente'));
+    $('#confirmar-carro-btn', sheet).addEventListener('click', () => {
+      DB.cierres = DB.cierres || {};
+      DB.cierres[claveCierre(carroId, fecha)] = { confirmadoEn: fecha + 'T' + new Date().toTimeString().slice(0, 5) + ':00' };
+      api_save();
+      closeSheet();
+      toast('Carro confirmado');
+      navigate('carroDetail', { id: carroId, fecha }, { push: false });
+      setTimeout(() => sheetReporteCierre(carroId, fecha), 250);
+    });
+  });
+}
+function sheetReporteCierre(carroId, fecha) {
+  const ventasDia = DB.ventas.filter(v => v.carroId === carroId && v.fecha === fecha);
+  const s = statsFor(ventasDia);
+  const porProducto = {};
+  ventasDia.forEach(v => v.items.forEach(it => {
+    porProducto[it.productoId] = (porProducto[it.productoId] || 0) + it.cantidad;
+  }));
+  const productosOrdenados = Object.entries(porProducto).sort((a, b) => b[1] - a[1]);
+
+  openSheet(`
+    <div class="sheet-head"><h3>Reporte de cierre</h3><button class="icon-btn" data-action="close-sheet">✕</button></div>
+    <p class="field-note" style="margin-bottom:14px;">${esc(nombreCarro(carroId))} · ${fmtDateLong(fecha)}</p>
+    <div class="stat-grid" style="margin-bottom:14px;">
+      <div class="stat-card"><div class="stat-label">${ICONS.cash} Vendido</div><div class="stat-value">${fmtMoney(s.totalVendido)}</div></div>
+      <div class="stat-card"><div class="stat-label">${ICONS.wallet} Pendiente</div><div class="stat-value">${fmtMoney(s.totalPendiente)}</div></div>
+      <div class="stat-card"><div class="stat-label">${ICONS.users} Clientes</div><div class="stat-value">${s.clientes}</div></div>
+      <div class="stat-card"><div class="stat-label">${ICONS.box} Productos</div><div class="stat-value">${s.productosVendidos}</div></div>
+    </div>
+    <div class="section-title" style="margin-top:0;">Clientes atendidos</div>
+    <div class="list" style="margin-bottom:14px;">
+      ${ventasDia.map(v => `<div class="row-card" style="cursor:default;"><div class="avatar">${initials(nombreCliente(v.clienteId))}</div><div class="row-main"><div class="row-title">${esc(nombreCliente(v.clienteId))}</div></div><div class="row-end">${badgeEstado(v.estado)}<div class="row-amount" style="margin-top:4px">${fmtMoney(v.total)}</div></div></div>`).join('') || `<div class="small-muted">Sin ventas registradas este día.</div>`}
+    </div>
+    <div class="section-title">Productos vendidos</div>
+    <div class="list" style="margin-bottom:16px;">
+      ${productosOrdenados.length === 0 ? `<div class="small-muted">Sin productos vendidos.</div>` :
+      productosOrdenados.map(([pid, cant]) => `<div class="price-row"><span class="pr-name">${esc(nombreProducto(parseInt(pid)))}</span><span class="pr-val">${cant} und.</span></div>`).join('')}
+    </div>
+    <button class="btn btn-secondary btn-block" id="imprimir-cierre">${ICONS.printer} Imprimir reporte</button>
+  `, (sheet) => {
+    $('#imprimir-cierre', sheet).addEventListener('click', () => imprimirCierre(carroId, fecha));
+  });
 }
 
 function sheetAsignarClientes(carroId, fecha) {
@@ -694,6 +933,12 @@ function sheetClienteDia(clienteId, carroId, fecha) {
       </div>
       <div class="row-sub">Forma de pago: ${payLabel(venta.formaPago)} ${venta.estado !== 'pagado' ? `· Pendiente: ${fmtMoney(ventaSaldo(venta))}` : ''}</div>
       <button class="btn btn-secondary btn-block" style="margin-top:16px;" data-action="ver-cliente-full" data-id="${clienteId}">Ver ficha del cliente</button>
+    ` : estaConfirmado(carroId, fecha) ? `
+      <div class="empty-state" style="padding:24px 10px;">
+        <div class="es-icon">${ICONS.lock}</div>
+        <h4>Este carro ya fue confirmado</h4>
+        <p>No se pueden registrar más pedidos para esta fecha.</p>
+      </div>
     ` : `
       <div class="empty-state" style="padding:24px 10px;">
         <div class="es-icon">${ICONS.box}</div>
@@ -754,9 +999,22 @@ function sheetCrearEditarCliente(clienteId) {
       <div class="field"><label>Carro asignado por defecto</label>
         <select id="f-carro">${DB.carros.map(c => `<option value="${c.id}" ${cliente && cliente.carroDefault === c.id ? 'selected' : ''}>${esc(c.nombre)}</option>`).join('')}</select>
       </div>
+      <div class="field">
+        <label>Lista de precios</label>
+        <div class="pay-options-2" id="f-lista">
+          <div class="pay-opt ${(!cliente || cliente.listaPrecio !== 'especial') ? 'active' : ''}" data-lista="normal">${ICONS.tag}Normal</div>
+          <div class="pay-opt ${cliente && cliente.listaPrecio === 'especial' ? 'active' : ''}" data-lista="especial">${ICONS.tag}Especial</div>
+        </div>
+        <p class="field-note">Este cliente comprará con esta lista hasta que la cambies aquí.</p>
+      </div>
       <button class="btn btn-primary btn-block" id="save-cliente">${cliente ? 'Guardar cambios' : 'Crear cliente'}</button>
     </div>
   `, (sheet) => {
+    let listaSeleccionada = cliente && cliente.listaPrecio === 'especial' ? 'especial' : 'normal';
+    $all('#f-lista .pay-opt', sheet).forEach(opt => opt.addEventListener('click', () => {
+      listaSeleccionada = opt.dataset.lista;
+      $all('#f-lista .pay-opt', sheet).forEach(o => o.classList.toggle('active', o === opt));
+    }));
     $('#save-cliente', sheet).addEventListener('click', () => {
       const nombre = $('#f-nombre', sheet).value.trim();
       const telefono = $('#f-telefono', sheet).value.trim();
@@ -764,11 +1022,11 @@ function sheetCrearEditarCliente(clienteId) {
       const carroDefault = parseInt($('#f-carro', sheet).value);
       if (!nombre) { toast('Escribe el nombre del cliente'); return; }
       if (cliente) {
-        Object.assign(cliente, { nombre, telefono, direccion, carroDefault });
+        Object.assign(cliente, { nombre, telefono, direccion, carroDefault, listaPrecio: listaSeleccionada });
         toast('Cliente actualizado');
       } else {
         const id = Math.max(0, ...DB.clientes.map(c => c.id)) + 1;
-        DB.clientes.push({ id, nombre, telefono, direccion, carroDefault });
+        DB.clientes.push({ id, nombre, telefono, direccion, carroDefault, listaPrecio: listaSeleccionada });
         toast('Cliente creado');
       }
       api_save();
@@ -791,6 +1049,7 @@ function viewClienteDetail(params) {
           <h2>${esc(cliente.nombre)}</h2>
           <div class="dh-meta">${ICONS.phone} ${esc(cliente.telefono)}</div>
           <div class="dh-meta" style="margin-top:2px">${ICONS.pin} ${esc(cliente.direccion)}</div>
+          <span class="dept-tag">${ICONS.tag} Lista ${listaLabel(cliente.listaPrecio)}</span>
         </div>
         <button class="icon-square" data-action="editar-cliente" data-id="${cliente.id}">${ICONS.edit}</button>
       </div>
@@ -826,11 +1085,13 @@ function mountClienteDetail(params) {
 
 function sheetVerVenta(ventaId) {
   const v = DB.ventas.find(v => v.id === ventaId);
+  const itemsOrdenados = v.items.slice().sort((a, b) => (b.cantidad * b.precioUnit) - (a.cantidad * a.precioUnit));
+  const cliente = DB.clientes.find(c => c.id === v.clienteId);
   openSheet(`
     <div class="sheet-head"><h3>Venta #${v.id}</h3><button class="icon-btn" data-action="close-sheet">✕</button></div>
-    <p class="field-note" style="margin-bottom:10px;">${fmtDateLong(v.fecha)} · ${esc(nombreCarro(v.carroId))} · ${esc(nombreCliente(v.clienteId))}</p>
+    <p class="field-note" style="margin-bottom:10px;">${fmtDateLong(v.fecha)} · ${esc(nombreCarro(v.carroId))} · ${esc(nombreCliente(v.clienteId))} · Lista ${listaLabel(cliente.listaPrecio)}</p>
     <div class="list" style="margin-bottom:14px;">
-      ${v.items.map(it => `
+      ${itemsOrdenados.map(it => `
         <div class="venta-item">
           <div class="vi-main"><div class="vi-name">${esc(nombreProducto(it.productoId))}</div><div class="vi-sub">${it.cantidad} × ${fmtMoney(it.precioUnit)}</div></div>
           <div class="row-amount">${fmtMoney(it.cantidad * it.precioUnit)}</div>
@@ -843,10 +1104,17 @@ function sheetVerVenta(ventaId) {
       <div class="section-title" style="margin-top:14px;">Abonos registrados</div>
       <div class="list">${v.abonos.map(a => `<div class="row-card" style="cursor:default;"><div class="avatar">${ICONS.wallet}</div><div class="row-main"><div class="row-title">${fmtMoney(a.valor)}</div><div class="row-sub">${fmtDateShort(a.fecha)} · ${payLabel(a.metodo)}</div></div></div>`).join('')}</div>
     ` : ''}
-    ${ventaSaldo(v) > 0 ? `<button class="btn btn-primary btn-block" style="margin-top:16px;" data-action="pagar-desde-venta" data-id="${v.id}">Registrar pago</button>` : ''}
+    <div class="internal-box">
+      <div class="ib-title">Datos internos (no mostrar al cliente)</div>
+      <div class="ib-row"><span>Costo total</span><span>${fmtMoney(costoVenta(v))}</span></div>
+      <div class="ib-row"><span>Ganancia estimada</span><strong>${fmtMoney(gananciaVenta(v))}</strong></div>
+    </div>
+    <button class="btn btn-secondary btn-block" style="margin-top:14px;" data-action="imprimir-factura" data-id="${v.id}">${ICONS.printer} Imprimir factura (3 copias)</button>
+    ${ventaSaldo(v) > 0 ? `<button class="btn btn-primary btn-block" style="margin-top:10px;" data-action="pagar-desde-venta" data-id="${v.id}">Registrar pago</button>` : ''}
   `, (sheet) => {
     const payBtn = $('[data-action="pagar-desde-venta"]', sheet);
     if (payBtn) payBtn.addEventListener('click', () => { closeSheet(); setTimeout(() => sheetRegistrarPago(v.clienteId, v.id), 180); });
+    $('[data-action="imprimir-factura"]', sheet).addEventListener('click', () => imprimirFactura(v.id));
   });
 }
 
@@ -854,16 +1122,24 @@ function sheetVerVenta(ventaId) {
    VISTA: PRODUCTOS
    ============================================================ */
 function viewProductos() {
+  const depFiltro = State.productosDept || 'todos';
+  const lista = depFiltro === 'todos' ? DB.productos : DB.productos.filter(p => p.departamento === depFiltro);
   return `
     <div class="page-header"><h2>Productos</h2><button class="btn btn-primary btn-sm" data-action="crear-producto">${ICONS.plus} Nuevo</button></div>
+    <div class="filter-row" id="dept-filters">
+      <button class="chip ${depFiltro === 'todos' ? 'active' : ''}" data-dept="todos">Todos</button>
+      ${DEPARTAMENTOS.map(d => `<button class="chip ${depFiltro === d ? 'active' : ''}" data-dept="${esc(d)}">${esc(d)}</button>`).join('')}
+    </div>
     <div class="product-grid">
-      ${DB.productos.map(p => `
+      ${lista.map(p => `
         <div class="product-card" data-action="editar-producto" data-id="${p.id}">
           <div class="p-icon">${ICONS.cookie}</div>
           <h4>${esc(p.nombre)}</h4>
-          <div class="small-muted">${esc(p.presentacion)}</div>
-          <div class="p-price">${fmtMoney(p.precio)}</div>
+          <div class="small-muted">${esc(p.presentacion)} · ${esc(p.formaVenta)}</div>
+          <div class="p-price">${fmtMoney(p.precioNormal)}</div>
+          <div class="small-muted">Especial: ${fmtMoney(p.precioEspecial)} · Costo: ${fmtMoney(p.costo)}</div>
           <div class="p-stock ${p.stock <= 15 ? 'stock-low' : ''}">${p.stock <= 15 ? '¡Stock bajo! ' : ''}Stock: ${p.stock}</div>
+          <span class="dept-tag">${esc(p.departamento)}</span>
         </div>`).join('')}
     </div>
   `;
@@ -872,6 +1148,11 @@ function mountProductos() {
   const crear = $('[data-action="crear-producto"]');
   if (crear) crear.addEventListener('click', () => sheetProducto());
   $all('[data-action="editar-producto"]').forEach(card => card.addEventListener('click', () => sheetProducto(parseInt(card.dataset.id))));
+  $('#dept-filters').addEventListener('click', (e) => {
+    const btn = e.target.closest('[data-dept]'); if (!btn) return;
+    State.productosDept = btn.dataset.dept;
+    renderApp();
+  });
 }
 function sheetProducto(productoId) {
   const p = productoId ? DB.productos.find(p => p.id === productoId) : null;
@@ -880,8 +1161,20 @@ function sheetProducto(productoId) {
     <div class="form-grid">
       <div class="field"><label>Nombre</label><input id="f-pnombre" value="${p ? esc(p.nombre) : ''}" placeholder="Ej: Cortador Estrella"></div>
       <div class="form-row-2">
-        <div class="field" style="margin-bottom:0"><label>Precio</label><input id="f-precio" type="number" min="0" value="${p ? p.precio : ''}" placeholder="3500"></div>
+        <div class="field" style="margin-bottom:0"><label>Precio normal</label><input id="f-precio-normal" type="number" min="0" value="${p ? p.precioNormal : ''}" placeholder="3500"></div>
+        <div class="field" style="margin-bottom:0"><label>Precio especial</label><input id="f-precio-especial" type="number" min="0" value="${p ? p.precioEspecial : ''}" placeholder="3100"></div>
+      </div>
+      <div class="form-row-2">
+        <div class="field" style="margin-bottom:0"><label>Costo</label><input id="f-costo" type="number" min="0" value="${p ? p.costo : ''}" placeholder="1800"></div>
         <div class="field" style="margin-bottom:0"><label>Stock</label><input id="f-stock" type="number" min="0" value="${p ? p.stock : ''}" placeholder="100"></div>
+      </div>
+      <div class="form-row-2">
+        <div class="field" style="margin-bottom:0"><label>Departamento</label>
+          <select id="f-departamento">${DEPARTAMENTOS.map(d => `<option ${p && p.departamento === d ? 'selected' : ''}>${esc(d)}</option>`).join('')}</select>
+        </div>
+        <div class="field" style="margin-bottom:0"><label>Forma de venta</label>
+          <select id="f-formaventa">${FORMAS_VENTA.map(f => `<option ${p && p.formaVenta === f ? 'selected' : ''}>${esc(f)}</option>`).join('')}</select>
+        </div>
       </div>
       <div class="field"><label>Presentación</label><input id="f-presentacion" value="${p ? esc(p.presentacion) : ''}" placeholder="Individual · metal"></div>
       <button class="btn btn-primary btn-block" id="save-producto">${p ? 'Guardar cambios' : 'Crear producto'}</button>
@@ -890,14 +1183,18 @@ function sheetProducto(productoId) {
   `, (sheet) => {
     $('#save-producto', sheet).addEventListener('click', () => {
       const nombre = $('#f-pnombre', sheet).value.trim();
-      const precio = parseFloat($('#f-precio', sheet).value) || 0;
+      const precioNormal = parseFloat($('#f-precio-normal', sheet).value) || 0;
+      const precioEspecial = parseFloat($('#f-precio-especial', sheet).value) || precioNormal;
+      const costo = parseFloat($('#f-costo', sheet).value) || 0;
       const stock = parseInt($('#f-stock', sheet).value) || 0;
+      const departamento = $('#f-departamento', sheet).value;
+      const formaVenta = $('#f-formaventa', sheet).value;
       const presentacion = $('#f-presentacion', sheet).value.trim() || 'Individual';
       if (!nombre) { toast('Escribe el nombre del producto'); return; }
-      if (p) { Object.assign(p, { nombre, precio, stock, presentacion }); toast('Producto actualizado'); }
+      if (p) { Object.assign(p, { nombre, precioNormal, precioEspecial, costo, stock, departamento, formaVenta, presentacion }); toast('Producto actualizado'); }
       else {
         const id = Math.max(0, ...DB.productos.map(p => p.id)) + 1;
-        DB.productos.push({ id, nombre, precio, stock, presentacion });
+        DB.productos.push({ id, nombre, precioNormal, precioEspecial, costo, stock, departamento, formaVenta, presentacion });
         toast('Producto creado');
       }
       api_save(); closeSheet(); renderApp();
@@ -909,6 +1206,35 @@ function sheetProducto(productoId) {
       api_save(); closeSheet(); renderApp(); toast('Producto eliminado');
     });
   });
+}
+
+/* ============================================================
+   VISTA: LISTAS DE PRECIOS
+   ============================================================ */
+function viewListasPrecios() {
+  const tab = State.listaPreciosTab;
+  const key = tab === 'especial' ? 'precioEspecial' : 'precioNormal';
+  const clientesEnLista = DB.clientes.filter(c => (c.listaPrecio || 'normal') === tab);
+  return `
+    <div class="page-header"><h2>Listas de precios</h2></div>
+    <div class="tabs-row">
+      <button class="tab-btn ${tab === 'normal' ? 'active' : ''}" data-lptab="normal">Normal</button>
+      <button class="tab-btn ${tab === 'especial' ? 'active' : ''}" data-lptab="especial">Especial</button>
+    </div>
+    <div class="soon-box" style="margin-top:0;margin-bottom:14px;">${ICONS.tag}<span>${clientesEnLista.length} cliente(s) compran con la lista <strong>${listaLabel(tab)}</strong>: ${clientesEnLista.map(c => esc(c.nombre)).join(', ') || '—'}.</span></div>
+    <div class="list" style="margin-bottom:16px;">
+      ${DB.productos.map(p => `
+        <div class="price-row">
+          <div><div class="pr-name">${esc(p.nombre)}</div><div class="pr-dept">${esc(p.departamento)}</div></div>
+          <span class="pr-val">${fmtMoney(p[key])}</span>
+        </div>`).join('')}
+    </div>
+    <button class="btn btn-secondary btn-block" id="imprimir-lista">${ICONS.printer} Imprimir esta lista</button>
+  `;
+}
+function mountListasPrecios() {
+  $all('[data-lptab]').forEach(b => b.addEventListener('click', () => { State.listaPreciosTab = b.dataset.lptab; renderApp(); }));
+  $('#imprimir-lista').addEventListener('click', () => imprimirListaPrecios(State.listaPreciosTab));
 }
 
 /* ============================================================
@@ -944,15 +1270,17 @@ function viewVentaNueva(params) {
           <option value="">Selecciona un cliente…</option>
           ${clientesDisponibles.map(c => `<option value="${c.id}" ${f.clienteId === c.id ? 'selected' : ''}>${esc(c.nombre)}</option>`).join('')}
         </select>
-        <p class="field-note">Se muestran primero los clientes asignados a este carro en esta fecha.</p>
+        <p class="field-note" id="v-lista-nota">Se muestran primero los clientes asignados a este carro en esta fecha.</p>
       </div>
     </div>
+
+    ${estaConfirmado(f.carroId, f.fecha) ? `<div class="lock-banner">${ICONS.lock}<div class="lb-text"><strong>Este carro ya fue confirmado</strong>Elige otra fecha o carro para poder registrar el pedido.</div></div>` : ''}
 
     <div class="section-title">Productos</div>
     <div class="card" style="margin-bottom:12px;">
       <div class="form-row-2" style="margin-bottom:10px;">
         <select id="v-producto" style="grid-column:1/2;">
-          ${DB.productos.map(p => `<option value="${p.id}">${esc(p.nombre)} · ${fmtMoney(p.precio)}</option>`).join('')}
+          ${DB.productos.map(p => `<option value="${p.id}">${esc(p.nombre)} · ${fmtMoney(precioParaCliente(p, DB.clientes.find(c => c.id === f.clienteId)))}</option>`).join('')}
         </select>
         <div class="qty-stepper" style="justify-content:center;">
           <button type="button" id="v-qty-minus">−</button>
@@ -1035,9 +1363,16 @@ function renderVentaTotal() {
 }
 function mountVentaNueva() {
   const f = State.ventaForm;
-  $('#v-fecha').addEventListener('change', (e) => { f.fecha = e.target.value; refreshClienteOptions(); });
-  $('#v-carro').addEventListener('change', (e) => { f.carroId = parseInt(e.target.value); refreshClienteOptions(); });
-  $('#v-cliente').addEventListener('change', (e) => { f.clienteId = e.target.value ? parseInt(e.target.value) : null; });
+  $('#v-fecha').addEventListener('change', (e) => { f.fecha = e.target.value; renderApp(); });
+  $('#v-carro').addEventListener('change', (e) => { f.carroId = parseInt(e.target.value); renderApp(); });
+  $('#v-cliente').addEventListener('change', (e) => { f.clienteId = e.target.value ? parseInt(e.target.value) : null; refreshProductoOptions(); });
+  function refreshProductoOptions() {
+    const sel = $('#v-producto');
+    const cliente = DB.clientes.find(c => c.id === f.clienteId);
+    if (sel) sel.innerHTML = DB.productos.map(p => `<option value="${p.id}">${esc(p.nombre)} · ${fmtMoney(precioParaCliente(p, cliente))}</option>`).join('');
+    const nota = $('#v-lista-nota');
+    if (nota) nota.textContent = cliente ? `Lista de precios de este cliente: ${listaLabel(cliente.listaPrecio)}.` : 'Se muestran primero los clientes asignados a este carro en esta fecha.';
+  }
 
   let qty = 1;
   $('#v-qty-minus').addEventListener('click', () => { qty = Math.max(1, qty - 1); $('#v-qty').textContent = qty; });
@@ -1046,9 +1381,10 @@ function mountVentaNueva() {
   $('#v-add-item').addEventListener('click', () => {
     const prodId = parseInt($('#v-producto').value);
     const prod = DB.productos.find(p => p.id === prodId);
+    const clienteActual = DB.clientes.find(c => c.id === f.clienteId);
     const existing = f.items.find(it => it.productoId === prodId);
     if (existing) existing.cantidad += qty;
-    else f.items.push({ productoId: prodId, cantidad: qty, precioUnit: prod.precio });
+    else f.items.push({ productoId: prodId, cantidad: qty, precioUnit: precioParaCliente(prod, clienteActual) });
     qty = 1; $('#v-qty').textContent = 1;
     $('#v-items-wrap').innerHTML = renderVentaItems();
     bindRemoveItems();
@@ -1084,15 +1420,10 @@ function mountVentaNueva() {
   if (abonoInput) abonoInput.addEventListener('input', (e) => { f.abonoInicial = parseFloat(e.target.value) || 0; });
 
   $('#v-submit').addEventListener('click', submitVenta);
-
-  function refreshClienteOptions() {
-    const sel = $('#v-cliente');
-    const clientesDisponibles = clientesParaCarroFecha(f.carroId, f.fecha);
-    sel.innerHTML = `<option value="">Selecciona un cliente…</option>` + clientesDisponibles.map(c => `<option value="${c.id}" ${f.clienteId === c.id ? 'selected' : ''}>${esc(c.nombre)}</option>`).join('');
-  }
 }
 function submitVenta() {
   const f = State.ventaForm;
+  if (estaConfirmado(f.carroId, f.fecha)) { toast('Este carro ya fue confirmado para esta fecha'); return; }
   if (!f.clienteId) { toast('Selecciona un cliente'); return; }
   if (f.items.length === 0) { toast('Agrega al menos un producto'); return; }
   const { total } = ventaCalculos();
@@ -1276,7 +1607,19 @@ function mountHistorial() {
    ============================================================ */
 function viewReportes() {
   const range = rangoDeFiltro(State.repFilter, State.repRange);
-  const general = statsFor(ventasEnRango(range.start, range.end));
+  const carroFiltro = State.repCarro; // 'todos' o id de carro
+  const carroIdNum = carroFiltro === 'todos' ? null : parseInt(carroFiltro);
+  const ventasFiltradas = ventasEnRango(range.start, range.end, carroIdNum);
+  const general = statsFor(ventasFiltradas);
+
+  const porProducto = {};
+  ventasFiltradas.forEach(v => v.items.forEach(it => {
+    if (!porProducto[it.productoId]) porProducto[it.productoId] = { cantidad: 0, total: 0 };
+    porProducto[it.productoId].cantidad += it.cantidad;
+    porProducto[it.productoId].total += it.cantidad * it.precioUnit;
+  }));
+  const productosOrdenados = Object.entries(porProducto).sort((a, b) => b[1].total - a[1].total);
+
   return `
     <div class="page-header"><h2>Reportes</h2></div>
     <div class="filter-row">
@@ -1288,8 +1631,14 @@ function viewReportes() {
       <input type="date" id="rep-end" value="${State.repRange.end}">
     </div>` : ''}
 
+    <div class="section-title">Carro</div>
+    <div class="filter-row">
+      <button class="chip ${carroFiltro === 'todos' ? 'active' : ''}" data-repcarro="todos">Todos (general)</button>
+      ${DB.carros.map(c => `<button class="chip ${carroFiltro == c.id ? 'active' : ''}" data-repcarro="${c.id}">${esc(c.nombre)}</button>`).join('')}
+    </div>
+
     <div class="card" style="margin-top:14px;">
-      <div class="section-title" style="margin-top:0;">Resultado general</div>
+      <div class="section-title" style="margin-top:0;">${carroIdNum ? 'Resultado · ' + esc(nombreCarro(carroIdNum)) : 'Resultado general'}</div>
       <div class="stat-grid">
         <div class="stat-card"><div class="stat-label">${ICONS.cash} Total vendido</div><div class="stat-value">${fmtMoney(general.totalVendido)}</div></div>
         <div class="stat-card"><div class="stat-label">${ICONS.wallet} Pendiente</div><div class="stat-value">${fmtMoney(general.totalPendiente)}</div></div>
@@ -1298,17 +1647,28 @@ function viewReportes() {
       </div>
     </div>
 
+    ${carroIdNum ? '' : `
     <div class="section-title">Resultado por carro</div>
     <div class="list">
       ${DB.carros.map(c => {
     const s = statsFor(ventasEnRango(range.start, range.end, c.id));
     return `
-        <div class="row-card" style="cursor:default;">
+        <div class="row-card" data-action="ir-reporte-carro" data-id="${c.id}">
           <div class="avatar">${ICONS.truck}</div>
           <div class="row-main"><div class="row-title">${esc(c.nombre)}</div><div class="row-sub">${s.clientes} clientes · ${s.nVentas} ventas</div></div>
           <div class="row-end"><div class="row-amount">${fmtMoney(s.totalVendido)}</div><div class="small-muted">pend. ${fmtMoney(s.totalPendiente)}</div></div>
         </div>`;
   }).join('')}
+    </div>`}
+
+    <div class="section-title">Ventas por producto</div>
+    <div class="list" style="margin-bottom:6px;">
+      ${productosOrdenados.length === 0 ? `<div class="small-muted">Sin ventas en este periodo.</div>` :
+      productosOrdenados.map(([pid, d]) => `
+        <div class="price-row">
+          <div><div class="pr-name">${esc(nombreProducto(parseInt(pid)))}</div><div class="pr-dept">${d.cantidad} unidades vendidas</div></div>
+          <span class="pr-val">${fmtMoney(d.total)}</span>
+        </div>`).join('')}
     </div>
 
     <div class="section-title">Exportar</div>
@@ -1321,6 +1681,8 @@ function viewReportes() {
 }
 function mountReportes() {
   $all('[data-repfilter]').forEach(b => b.addEventListener('click', () => { State.repFilter = b.dataset.repfilter; renderApp(); }));
+  $all('[data-repcarro]').forEach(b => b.addEventListener('click', () => { State.repCarro = b.dataset.repcarro; renderApp(); }));
+  $all('[data-action="ir-reporte-carro"]').forEach(row => row.addEventListener('click', () => { State.repCarro = row.dataset.id; renderApp(); }));
   const s = $('#rep-start'), en = $('#rep-end');
   if (s) s.addEventListener('change', () => { State.repRange.start = s.value; renderApp(); });
   if (en) en.addEventListener('change', () => { State.repRange.end = en.value; renderApp(); });
@@ -1334,7 +1696,8 @@ function viewMas() {
   const items = [
     { id: 'perfil', icon: 'users', title: 'Perfil del jefe', sub: 'Tu información de cuenta' },
     { id: 'usuarios', icon: 'gear', title: 'Usuarios', sub: 'Conductores y accesos' },
-    { id: 'productos', icon: 'box', title: 'Productos', sub: 'Catálogo de cortadores' },
+    { id: 'productos', icon: 'box', title: 'Productos', sub: 'Catálogo por departamento' },
+    { id: 'listasPrecios', icon: 'tag', title: 'Listas de precios', sub: 'Precios normales y especiales' },
     { id: 'pagos', icon: 'wallet', title: 'Pagos y deudas', sub: 'Clientes con saldo pendiente' },
     { id: 'historial', icon: 'history', title: 'Historial de ventas', sub: 'Todas las ventas registradas' },
     { id: 'reportes', icon: 'chart', title: 'Reportes', sub: 'Resultados por periodo y carro' },
@@ -1483,13 +1846,14 @@ const VIEWS = {
   clientes: viewClientes, clienteDetail: viewClienteDetail,
   productos: viewProductos, ventaNueva: viewVentaNueva, pagos: viewPagos,
   historial: viewHistorial, reportes: viewReportes, mas: viewMas,
-  perfil: viewPerfil, usuarios: viewUsuarios, config: viewConfig, notificaciones: viewNotificaciones
+  perfil: viewPerfil, usuarios: viewUsuarios, config: viewConfig, notificaciones: viewNotificaciones,
+  listasPrecios: viewListasPrecios
 };
 const VIEW_MOUNT = {
   dashboard: mountDashboard, carroDetail: mountCarroDetail, clientes: mountClientes,
   clienteDetail: mountClienteDetail, productos: mountProductos, ventaNueva: mountVentaNueva,
   pagos: mountPagos, historial: mountHistorial, reportes: mountReportes,
-  perfil: mountPerfil, usuarios: mountUsuarios, config: mountConfig
+  perfil: mountPerfil, usuarios: mountUsuarios, config: mountConfig, listasPrecios: mountListasPrecios
 };
 
 /* ============================================================
